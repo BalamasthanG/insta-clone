@@ -158,7 +158,7 @@ function App() {
       <div className="app__header">
         <img
           className="app__headerImage"
-          src="https://i.dlpng.com/static/png/321579_preview.png"
+          src="https://www.transparentpng.com/thumb/logo-instagram/z75gfy-instagram-logo-png.png"
           alt=""
         />
         {user ? (
