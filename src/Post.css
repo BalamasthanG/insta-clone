@@ -8,11 +8,37 @@
 }
 
 .post {
-  max-width: 400px;
+  max-width: 350px;
   background-color: white;
   border: 1px solid lightgray;
   margin-bottom: 20px;
   object-fit: contain;
+}
+
+.post__comments {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  white-space: nowrap;
+  width: 85%;
+  overflow: hidden;
+  text-overflow: "....";
+}
+
+.post__commentbox {
+  display: flex;
+  margin-top: 5px;
+  border-top: 1px solid lightgray;
+}
+
+.post__input {
+  flex: 1;
+  border: none !important;
+  padding: 10px;
+}
+
+.post__button {
+  flex: 0;
 }
 
 .post__text {

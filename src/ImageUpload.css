@@ -1,7 +1,6 @@
 .imageupload {
   display: flex;
   flex-direction: column;
-  margin-bottom: 5px;
   margin-top: 10px;
   background-color: white;
   bottom: 0;

@@ -46,6 +46,7 @@ function App() {
       if (authUser) {
         console.log(authUser);
         setUser(authUser);
+        setUserName(authUser.displayName);
       } else {
         setUser(null);
       }
@@ -53,7 +54,7 @@ function App() {
     return () => {
       unsubscribe();
     };
-  }, [user, username]);
+  }, [user]);
 
   useEffect(() => {
     db.collection("posts")
@@ -70,7 +71,6 @@ function App() {
 
   const signUp = (event) => {
     event.preventDefault();
-
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((authUser) => {
@@ -80,15 +80,26 @@ function App() {
       })
       .catch((error) => alert(error.message));
     setOpen(false);
+    auth.signOut();
+    alert("Register success, Sign In");
   };
 
   const signIn = (event) => {
     event.preventDefault();
     auth
       .signInWithEmailAndPassword(email, password)
-      .then((user) => setUser(user))
+      .then((user) => {
+        setUser(user);
+        setUserName(user.username);
+      })
       .catch((e) => alert(e.message));
     setOpenSignIn(false);
+  };
+
+  const signOut = () => {
+    auth.signOut();
+    setUser(null);
+    setUserName("");
   };
 
   return (
@@ -99,7 +110,7 @@ function App() {
             <center>
               <img
                 className="app__headerImage"
-                src="https://i.dlpng.com/static/png/321579_preview.png"
+                src="https://www.transparentpng.com/thumb/logo-instagram/z75gfy-instagram-logo-png.png"
                 alt=""
               />
             </center>
@@ -133,7 +144,7 @@ function App() {
             <center>
               <img
                 className="app__headerImage"
-                src="https://i.dlpng.com/static/png/321579_preview.png"
+                src="https://www.transparentpng.com/thumb/logo-instagram/z75gfy-instagram-logo-png.png"
                 alt=""
               />
             </center>
@@ -161,8 +172,9 @@ function App() {
           src="https://www.transparentpng.com/thumb/logo-instagram/z75gfy-instagram-logo-png.png"
           alt=""
         />
-        {user ? (
-          <Button onClick={() => auth.signOut()}>Sign Out</Button>
+        {user && username ? <h3>{username}</h3> : ""}
+        {user && username ? (
+          <Button onClick={signOut}>Sign Out</Button>
         ) : (
           <div className="app__loginContainer">
             <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
@@ -175,9 +187,11 @@ function App() {
           {posts.map(({ id, post }) => (
             <Post
               key={id}
+              postId={id}
               username={post.username}
               imageUrl={post.imageUrl}
               caption={post.caption}
+              user={user}
             />
           ))}
         </div>
