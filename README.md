@@ -6,13 +6,17 @@ https://instag-clone-bmg.web.app/
 
 ## Concepts used
 
-Single page app.
-Modal material UI used.
-Firebase authentication used.
-Flex box designed.
+1. Single page app.
+2. Modal material UI used.
+3. Firebase authentication used.
+4. Flex box designed.
 
 ## Available scripts
 
 ### npm run build
 
+to Build the project.
+
 ### npm start
+
+To run the project => http://localhost:3000/
